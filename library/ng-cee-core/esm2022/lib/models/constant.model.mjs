@@ -1,0 +1,7 @@
+export var Constant;
+(function (Constant) {
+    Constant[Constant["listInitialDisplayValue"] = 5] = "listInitialDisplayValue";
+    Constant[Constant["listDisplayLoopLength"] = 3] = "listDisplayLoopLength";
+    Constant[Constant["listDefaultValue"] = 20] = "listDefaultValue";
+})(Constant || (Constant = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc3RhbnQubW9kZWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi9Bbmd1bGFyLTE3L0VTRi1Bbmd1bGFyLVdGRS1MaWJyYXJ5L3Byb2plY3RzL25nLWNlZS1jb3JlL3NyYy9saWIvbW9kZWxzL2NvbnN0YW50Lm1vZGVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBTixJQUFZLFFBSVg7QUFKRCxXQUFZLFFBQVE7SUFDaEIsNkVBQTJCLENBQUE7SUFDM0IseUVBQXlCLENBQUE7SUFDekIsZ0VBQXFCLENBQUE7QUFDekIsQ0FBQyxFQUpXLFFBQVEsS0FBUixRQUFRLFFBSW5CIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGVudW0gQ29uc3RhbnQge1xyXG4gICAgbGlzdEluaXRpYWxEaXNwbGF5VmFsdWUgPSA1LFxyXG4gICAgbGlzdERpc3BsYXlMb29wTGVuZ3RoID0gMyxcclxuICAgIGxpc3REZWZhdWx0VmFsdWUgPSAyMFxyXG59Il19
