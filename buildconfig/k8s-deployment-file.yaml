@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-app
+  name: test-app
+  namespace: dev-cee-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+        - env:
+            - name: domain
+              valueFrom:
+                configMapKeyRef:
+                  key: DOMAIN
+                  name: test-config-map
+            - name: clientId
+              valueFrom:
+                configMapKeyRef:
+                  key: CLIENTID
+                  name: test-config-map
+            - name: clientKey
+              valueFrom:
+                configMapKeyRef:
+                  key: CLIENTKEY
+                  name: test-config-map
+            - name: redirectUri
+              valueFrom:
+                configMapKeyRef:
+                  key: REDIRECTURI
+                  name: test-config-map
+            - name: BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: BASE_URL
+                  name: test-config-map
+            - name: wfe_app_id
+              valueFrom:
+                configMapKeyRef:
+                  key: WFE_APP_ID
+                  name: test-config-map
+            - name: ldapOu
+              valueFrom:
+                configMapKeyRef:
+                  key: LDAPOU
+                  name: test-config-map
+          image: '${parameters.image}:${tag}'
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - sleep
+                  - '60'
+          name: test-app
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 0
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 65
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: test-app-hpa
+spec:
+  maxReplicas: 5
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: test-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: test-app-service
+  name: test-app-service
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: test-app
+

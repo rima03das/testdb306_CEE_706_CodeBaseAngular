@@ -1,0 +1,7 @@
+version: "2"
+services:
+  build:
+    image: ${RepositoryName}:${ImageTag}
+    build:
+      context: ../
+      dockerfile: buildconfig/Dockerfile

@@ -1,0 +1,85 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "types": [
+      "jest", "react", "react-dom"
+    ],
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "ES2022",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types",
+       "src/types"
+    ],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "paths": {
+      "cee": [
+        "dist/cee"
+      ],
+      "cee/*": [
+        "dist/cee/*"
+      ],
+      "ng-cee-core": [
+        "dist/ng-cee-core"
+      ],
+      "ng-cee-core/*": [
+        "dist/ng-cee-core/*"
+      ],
+      "ng-cee-idvs": [
+        "dist/ng-cee-idvs"
+      ],
+      "ng-cee-idvs/*": [
+        "dist/ng-cee-idvs/*"
+      ],
+      "ng-cee-api-integration": [
+        "dist/ng-cee-api-integration"
+      ],
+      "ng-cee-api-integration/*": [
+        "dist/ng-cee-api-integration/*"
+      ],
+      "ng-cee-oidc": [
+        "dist/ng-cee-oidc"
+      ],
+      "ng-cee-oidc/*": [
+        "dist/ng-cee-oidc/*"
+      ],
+      "ng-cee-msal": [
+        "dist/ng-cee-msal"
+      ],
+      "ng-cee-msal/*": [
+        "dist/ng-cee-msal/*"
+      ],
+      "rxjs": [
+        "node_modules/rxjs"
+      ],
+      "rxjs/*": [
+        "node_modules/rxjs/*"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/app/custom/table-column-setting/table-column-setting.component.ts",
+    "src/**/*.d.ts"
+  ],
+   "exclude": [
+    
+  ]
+}

@@ -1,0 +1,203 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"cee-angular": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "",
+			"sourceRoot": "src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"allowedCommonJsDependencies": [
+							"lodash"
+						],
+						"outputPath": "dist/cee-angular",
+						"index": "src/index.html",
+						"main": "src/main.ts",
+						"polyfills": "src/polyfills.ts",
+						"tsConfig": "tsconfig.app.json",
+						"assets": [
+							"src/favicon.ico",
+							"src/.htaccess",
+							"src/assets"
+						],
+						"styles": [
+							"./node_modules/ngx-bar-rating/themes/br-default-theme.scss",
+							"./node_modules/ngx-bar-rating/themes/br-stars-theme.scss",
+							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+							"./node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"./node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
+							"./node_modules/c3/c3.min.css",
+							"src/styles/styles.scss",
+							"node_modules/ngx-toastr/toastr.css",
+							"./node_modules/ngx-ui-switch/ui-switch.component.css",
+							"./node_modules/quill/dist/quill.core.css",
+							"./node_modules/quill/dist/quill.bubble.css",
+							"./node_modules/quill/dist/quill.snow.css",
+							"./node_modules/quill-mention/dist/quill.mention.min.css",
+							"src/styles/pdf-styles.scss"
+						],
+						"scripts": [
+							"node_modules/jquery/dist/jquery.js",
+							"node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+							"node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"
+						],
+						"vendorChunk": true,
+						"extractLicenses": false,
+						"buildOptimizer": false,
+						"sourceMap": true,
+						"optimization": false,
+						"namedChunks": true,
+						"extraWebpackConfig": "webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.prod.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "4mb",
+									"maximumError": "10mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							],
+							"extraWebpackConfig": "webpack.prod.config.js"
+						},
+						"uat": {
+							"budgets": [
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.uat.ts"
+								}
+							]
+						},
+						"qc": {
+							"budgets": [
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.qc.ts"
+								}
+							]
+						}
+					},
+					"defaultConfiguration": ""
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"options": {
+						"buildTarget": "cee-angular:build",
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "webpack.config.js",
+						 "liveReload": false
+					},
+				
+					"configurations": {
+						"production": {
+							"buildTarget": "cee-angular:build:production",
+							"extraWebpackConfig": "webpack.prod.config.js"
+						},
+						"qc": {
+							"buildTarget": "cee-angular:build:qc"
+						},
+						"uat": {
+							"buildTarget": "cee-angular:build:uat"
+						}
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"buildTarget": "cee-angular:build",
+						"extraWebpackConfig": "webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"tsConfig": "tsconfig.spec.json",
+						"karmaConfig": "karma.conf.js",
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing",
+							"src/polyfills.ts"
+						],
+						"assets": [
+							"src/favicon.ico",
+							"src/assets"
+						],
+						"styles": [
+							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+							"./node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"./node_modules/c3/c3.min.css",
+							"src/styles/styles.scss",
+							"./node_modules/ngx-toastr/toastr.css",
+							"node_modules/ngx-toastr/toastr.css"
+						],
+						"scripts": [
+							"node_modules/jquery/dist/jquery.js",
+							"node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+							"node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"
+						]
+					}
+				},
+				"e2e": {
+					"builder": "@angular-devkit/build-angular:protractor",
+					"options": {
+						"protractorConfig": "e2e/protractor.conf.js",
+						"devServerTarget": "cee-angular:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "cee-angular:serve:production"
+						}
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"analytics": false,
+		"schematicCollections": [
+			"@datorama/akita"
+		]
+	}
+}

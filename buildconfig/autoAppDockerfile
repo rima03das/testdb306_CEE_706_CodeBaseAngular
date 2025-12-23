@@ -1,0 +1,9 @@
+FROM nginx:1.15.2-alpine
+RUN rm -rf /usr/share/nginx/html && \
+    rm -rf /etc/nginx/conf.d/default.conf
+
+# Copy config and run project
+COPY buildconfig/nginx.conf /etc/nginx/conf.d/default.conf
+COPY dist/cee-angular /usr/share/nginx/html
+
+CMD nginx -g "daemon off;"
